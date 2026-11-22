@@ -65,3 +65,38 @@ AI digunakan untuk memberikan panduan membuat repository baru melalui website Gi
 
 003 / 7 - Using HEX Colors code with the Color Data Type: https://chatgpt.com/s/t_6af55a2254d88191b504ac83c86ca269 & https://chatgpt.com/s/t_6af55a352d1881919feff6be3d36e021 
 AI digunakan untuk memahami cara mengganti warna widget Flutter menggunakan kode HEX serta fungsi penggunaan keyword const pada Flutter.
+
+### Tugas 8
+1. Perbedaan Navigator.push(), pushReplacement(), dan pop()
+   - Navigator.push() menambahkan halaman baru di atas tumpukan (stack) route. Halaman sebelumnya tetap tersimpan di bawahnya, sehingga pengguna bisa kembali menggunakan tombol kembali bawaan perangkat.
+   - Navigator.pushReplacement() mengganti halaman yang sedang tampil dengan halaman baru. Halaman lama dibuang dari stack, sehingga tidak ada halaman di bawahnya yang bisa dikembalikan lewat tombol kembali.
+    - Navigator.pop() membuang halaman teratas dari stack dan kembali ke halaman di bawahnya. Di proyek ini pop() juga dipakai untuk menutup AlertDialog.
+
+    Untuk membuka formulir dari kartu aksi, saya menggunakan Navigator.push() di widget ItemCard, supaya halaman utama tetap ada di bawah formulir dan pengguna bisa kembali dengan tombol kembali bawaan perangkat atau browser.
+
+    Opsi Home di drawer memakai Navigator.pushReplacement() dengan MaterialPageRoute ke MyHomePage(). Halaman formulir yang sedang tampil diganti halaman utama, sehingga pengguna kembali ke halaman utama tanpa menumpuk halaman baru di stack. Drawer memakai pushReplacement agar perpindahan antarmenu tidak membuat stack terus bertambah.
+
+ 2.  Scaffold menyediakan kerangka standar halaman (AppBar di atas, body, dan drawer di samping). Setiap halaman (drawer, form Experience, form Skill) memakai kerangka yang sama, sehingga posisi judul, ikon hamburger, dan area konten selalu seragam. LeftDrawer dibuat sekali di lib/widgets/left_drawer.dart lalu dipakai ulang di semua halaman lewat properti drawer: const LeftDrawer(), sehingga navigasi konsisten dan tidak ditulis berulang.
+   
+Contoh penggunaan warna tema di lebih dari satu halaman: warna utama portofolio (indigo) didefinisikan sekali lewat ColorScheme.fromSeed(seedColor: Colors.indigo) di main.dart, lalu dipakai oleh AppBar di halaman menu, AppBar di kedua halaman form, tombol Save, dan header drawer (Theme.of(context).colorScheme.primary). Jika warna tema diubah di satu tempat, semua halaman ikut berubah.
+
+3. Formulir disusun dalam Column yang berisi Padding dan TextFormField/DropdownButtonFormField berurutan dari atas ke bawah, karena formulir adalah daftar isian yang dibaca vertikal. Padding memberi jarak 8 piksel di sekeliling setiap kolom agar tidak menempel satu sama lain dan area sentuhnya lebih nyaman. SingleChildScrollView membungkus Column agar isi formulir bisa digulir ketika ruang layar terbatas, misalnya di layar ponsel yang sempit atau saat papan ketik muncul dan menutupi sebagian layar. Tanpa penggulir, Column yang lebih tinggi dari layar akan overflow (muncul garis kuning-hitam) dan tombol Save bisa tidak terjangkau. Di halaman menu, SingleChildScrollView juga dipakai agar grid kartu tidak overflow di layar lebar.
+
+4. Peran GlobalKey<FormState>, validator, dan validate()
+   - GlobalKey<FormState> dipasang pada widget Form sebagai pegangan untuk mengakses FormState dari luar widget Form, sehingga tombol Save bisa memicu validasi dan reset().
+   - validator adalah fungsi pada setiap TextFormField yang memeriksa isinya. Fungsi mengembalikan teks pesan error jika isian tidak valid.
+   - validate() dipanggil saat tombol Save ditekan. Ia menjalankan seluruh validator di dalam form, menampilkan pesan error merah pada kolom yang tidak valid, dan mengembalikan true hanya jika semua isian valid. Dialog ringkasan hanya ditampilkan jika hasilnya true.
+
+   Contoh nilai yang ditolak: nama skill yang hanya berisi spasi (`"   "`). Validator memakai value.trim().isEmpty, sehingga isian tersebut ditolak sebagai kosong. Contoh lain: URL abc ditolak karena tidak diawali http/https dan tidak punya host.
+
+   Memilih jenis input atau papan ketik saja belum cukup karena itu hanya memberi petunjuk, bukan aturan. keyboardType: TextInputType.url hanya mengubah tampilan papan ketik, tetapi pengguna tetap bisa mengetik teks apa pun, menempelnya dari clipboard, atau mengisi spasi saja. Papan ketik juga tidak ada di semua perangkat (misalnya Chrome desktop dengan keyboard fisik). Karena itu aturan data tetap harus diperiksa lewat validator.
+   
+### AI Disclosure Tugas 7
+004 / 8 - Implementasi Warna Tema pada Drawer Header : https://chatgpt.com/s/t_6b02fb02d0a081918c450a75632c6800
+digunakan untuk membantu memahami cara menerapkan warna tema aplikasi pada widget DrawerHeader di Flutter. AI juga membantu memberikan arahan terkait penggunaan Theme.of(context).colorScheme.primary agar warna pada Drawer mengikuti tema utama aplikasi secara konsisten. 
+
+005 / 8 - Penyusunan Skenario Pengujian Manual Aplikasi Flutte : https://chatgpt.com/s/t_6b02fb86fa8081918df213ee1cfc4ccc
+digunakan untuk membantu menyusun skenario pengujian manual (manual testing) pada aplikasi Flutter, meliputi pengujian navigasi melalui kartu aksi dan Drawer, validasi input formulir Skill dan Experience, proses penyimpanan data, serta pengujian tampilan pada ukuran layar ponsel.
+
+006 / 8 - Pemahaman Navigasi Menggunakan Navigator.push() : https://chatgpt.com/s/t_6b02fc2206c48191815ce213a13d5701
+digunakan untuk membantu memahami konsep penggunaan Navigator.push() dalam navigasi Flutter, khususnya terkait cara membuka halaman formulir melalui kartu aksi dan mekanisme kembali ke halaman utama menggunakan tombol Back bawaan perangkat.
