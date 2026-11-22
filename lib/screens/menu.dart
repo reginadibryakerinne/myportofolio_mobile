@@ -1,5 +1,5 @@
 import 'package:material_ui/material_ui.dart';
-import 'package:myportofolio_mobile/widgets/experience_card.dart';
+import 'package:myportofolio_mobile/widgets/item_card.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -13,6 +13,8 @@ class MyHomePage extends StatelessWidget {
     ItemHomepage("Lihat Experience", Icons.folder, Colors.orange.shade700),
     ItemHomepage("Tambah Experience", Icons.add_circle, Colors.greenAccent),
     ItemHomepage("Logout", Icons.logout, Colors.pinkAccent),
+    ItemHomepage("Lihat Skill", Icons.folder, Colors.lightBlueAccent),
+    ItemHomepage("Tambah Skill", Icons.add_circle, Colors.yellowAccent),
   ];
 
   @override

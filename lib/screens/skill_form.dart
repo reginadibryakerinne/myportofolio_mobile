@@ -44,7 +44,7 @@ class _SkillFormPageState extends State<SkillFormPage> {
                 child: TextFormField(
                   maxLength: 255,
                   decoration: InputDecoration(
-                    hintText: "Skill name",
+                    hintText: "nama Skill",
                     labelText: "Skill",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
@@ -58,10 +58,10 @@ class _SkillFormPageState extends State<SkillFormPage> {
                   validator: (String? value) {
                     // Reject empty input and input containing only spaces.
                     if (value == null || value.trim().isEmpty) {
-                      return "Skill name cannot be empty!";
+                      return "nama skill tidak boleh kosong!";
                     }
                     if (value.trim().length > 255) {
-                      return "Skill name must be at most 255 characters!";
+                      return "nama skill maksimal 255 karakter";
                     }
                     return null;
                   },
@@ -73,8 +73,8 @@ class _SkillFormPageState extends State<SkillFormPage> {
                 child: TextFormField(
                   maxLines: 3,
                   decoration: InputDecoration(
-                    hintText: "Describe your skill",
-                    labelText: "Skill Description",
+                    hintText: "Ceritakan Skillmu",
+                    labelText: "Deskripsi Skill",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
@@ -86,7 +86,7 @@ class _SkillFormPageState extends State<SkillFormPage> {
                   },
                   validator: (String? value) {
                     if (value == null || value.trim().isEmpty) {
-                      return "Description cannot be empty!";
+                      return "Deskripsi tidak boleh kosong!";
                     }
                     return null;
                   },
@@ -97,7 +97,7 @@ class _SkillFormPageState extends State<SkillFormPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: DropdownButtonFormField<String>(
                   decoration: InputDecoration(
-                    labelText: "Skill Category",
+                    labelText: "Kategori Skill",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
@@ -124,7 +124,7 @@ class _SkillFormPageState extends State<SkillFormPage> {
                   decoration: InputDecoration(
                     hintText:
                         "https://drive.google.com/thumbnail?id=...&sz=w1000",
-                    labelText: "Skill URL (optional)",
+                    labelText: "Skill URL (opsional)",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
@@ -143,7 +143,7 @@ class _SkillFormPageState extends State<SkillFormPage> {
                     if (uri == null ||
                         !(uri.isScheme('http') || uri.isScheme('https')) ||
                         uri.host.isEmpty) {
-                      return "Enter a valid URL (starting with http/https)!";
+                      return "Masukkan URL yang valid (diawali http/https)!";
                     }
                     return null;
                   },
@@ -161,14 +161,14 @@ class _SkillFormPageState extends State<SkillFormPage> {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: const Text('Skill added successfully!'),
+                              title: const Text('Skill berhasil ditambahkan!'),
                               content: SingleChildScrollView(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('Skill: ${_title.trim()}'),
-                                    Text('Description: ${_description.trim()}'),
-                                    Text('Category: ${_categories[_category]}'),
+                                    Text('Nama Skill: ${_title.trim()}'),
+                                    Text('Deskripsi: ${_description.trim()}'),
+                                    Text('Kategori: ${_categories[_category]}'),
                                     Text('URL: ${_thumbnail.trim()}'),
                                   ],
                                 ),
