@@ -32,8 +32,6 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
         title: const Center(
           child: Text('Add Experience Form'),
         ),
-        backgroundColor: Colors.indigo,
-        foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),
       body: Form(
@@ -156,9 +154,6 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: WidgetStateProperty.all(Colors.indigo),
-                    ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         showDialog(
@@ -198,10 +193,7 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                         );
                       }
                     },
-                    child: const Text(
-                      "Save",
-                      style: TextStyle(color: Colors.white),
-                    ),
+                    child: const Text("Save"),
                   ),
                 ),
               ),
